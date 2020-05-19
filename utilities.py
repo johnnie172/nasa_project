@@ -1,8 +1,11 @@
 import requests, os
+from termcolor import colored, cprint
 
-#Getting user folder
+# Getting user folder
 user = os.getlogin()
 key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
+file_length = []
+
 
 def check_for_media_type(url_data):
     media_type = url_data["media_type"]
@@ -12,22 +15,25 @@ def check_for_media_type(url_data):
     else:
         return False
 
-def file_downloader(user_url):
-    file_request = requests.get('{}?api_key={}'.format(user_url, key))
-    file_length = int(file_request.headers.get('content-length'))
 
-    #Checking for the response status
+def pic_downloader(user_url):
+    file_request = requests.get('{}?api_key={}'.format(user_url, key))
+    file_length.append(int(file_request.headers.get('content-length')))
+
+    # Checking for the response status
     if file_request.status_code == 200:
         with open("C:/Users/{}/Downloads/image.jpg".format(user), 'wb') as file:
             file.write(file_request.content)
 
-    downloaded_length = os.path.getsize("C:/Users/{}/Downloads/image.jpg".format(user))
+
+def checking_file_size():
 
     # Checking if file downloaded
-    if downloaded_length == file_length:
-        print("The pic has been downloaded to your PC")
+    downloaded_length = os.path.getsize("C:/Users/{}/Downloads/image.jpg".format(user))
+    if downloaded_length == file_length[0]:
+        print(colored('The pic has been downloaded to your PC', 'blue'))
     else:
-        print("ERROR during download")
+        print(colored('ERROR during download', 'red'))
 
 
 def loading():
@@ -38,6 +44,8 @@ def loading():
     loading5 = colored('.', 'red', attrs=['reverse', 'blink'])
 
     loading_lst = [loading1, loading2, loading3, loading4, loading5]
-    for load in loading_lst[0:4]:
-        print(load, end='')
-        time.sleep(1)
+    while True:
+
+        for load in loading_lst:
+            print(load, end='')
+            time.sleep(1)
