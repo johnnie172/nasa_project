@@ -17,8 +17,6 @@ def get_date_from_user():
 
 
 def get_quality_from_user(url_data):
-    media_type = url_data["media_type"]
-
     user_input_hd = input('Do you want it in HD or not? (enter "HD"/"not"): ').lower()
 
     if user_input_hd[0] == "h":

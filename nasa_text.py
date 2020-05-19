@@ -21,11 +21,12 @@ def main():
 #Getting the url dict:
     url_data = json.loads(response.text)
 
+#Checking for media type:
     if utilities.check_for_media_type(url_data):
         selected_quality = user_input.get_quality_from_user(url_data)
         utilities.file_downloader(selected_quality)
     else:
-        print("Sorry, we are currently do not supporting video download, here is the link to the video:")
+        print("Sorry, we are currently not supporting video download, here is the link to the video:")
         print(url_data["url"])
 
 
