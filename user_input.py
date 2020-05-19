@@ -29,4 +29,6 @@ def get_quality_from_user(url_data):
     else:
         selected_quality_key = "url"
 
+    return url_data[selected_quality_key]
+
 
