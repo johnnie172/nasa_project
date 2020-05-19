@@ -17,10 +17,7 @@ def get_date_from_user():
 
 
 def get_quality_from_user(url_data):
-
-    if "hdurl" not in url_data:
-        print("Sorry, there is no HD option for this date.")
-        return url_data["url"]
+    media_type = url_data["media_type"]
 
     user_input_hd = input('Do you want it in HD or not? (enter "HD"/"not"): ').lower()
 

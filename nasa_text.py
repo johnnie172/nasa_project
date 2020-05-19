@@ -11,20 +11,23 @@ def main():
     selected_date = user_input.get_date_from_user()
 
     response = requests.get('https://api.nasa.gov/planetary/apod?api_key={}&date={}'.format(key, selected_date))
-
     # checking for code 200 (ok)
     if response:
-        print('**Success!! you will soon get the pic!')
+        print('**Success! we will now check the media type')
     else:
         print('An error has occurred.')
         print('Response cods: {}'.format(response))
 
-#Getting the url text
-    response_dict = json.loads(response.text)
+#Getting the url dict:
+    url_data = json.loads(response.text)
 
-    selected_quality = user_input.get_quality_from_user(response_dict)
+    if utilities.check_for_media_type(url_data):
+        selected_quality = user_input.get_quality_from_user(url_data)
+        utilities.file_downloader(selected_quality)
+    else:
+        print("Sorry, we are currently do not supporting video download, here is the link to the video:")
+        print(url_data["url"])
 
-    utilities.file_downloader(selected_quality)
 
 
 

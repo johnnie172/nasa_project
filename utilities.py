@@ -4,6 +4,14 @@ import requests, os
 user = os.getlogin()
 key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
 
+def check_for_media_type(url_data):
+    media_type = url_data["media_type"]
+
+    if 'video' not in media_type:
+        return True
+    else:
+        return False
+
 def file_downloader(user_url):
     file_request = requests.get('{}?api_key={}'.format(user_url, key))
     file_length = int(file_request.headers.get('content-length'))
