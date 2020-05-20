@@ -1,8 +1,11 @@
 import requests, os
 from termcolor import colored, cprint
+from pathlib import Path
+
 
 # Getting user folder
-user = os.getlogin()
+#user = os.getlogin()
+home = str(Path.home())
 key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
 file_length = []
 
@@ -22,14 +25,13 @@ def pic_downloader(user_url):
 
     # Checking for the response status
     if file_request.status_code == 200:
-        with open("C:/Users/{}/Downloads/image.jpg".format(user), 'wb') as file:
+        with open('{}/image.jpg'.format(home), 'wb') as file:
             file.write(file_request.content)
 
 
 def checking_file_size():
-
     # Checking if file downloaded
-    downloaded_length = os.path.getsize("C:/Users/{}/Downloads/image.jpg".format(user))
+    downloaded_length = os.path.getsize('{}/image.jpg'.format(home))
     if downloaded_length == file_length[0]:
         print(colored('The pic has been downloaded to your PC', 'blue'))
     else:
