@@ -5,7 +5,8 @@ import user_input, utilities
 def main():
     selected_date = user_input.get_date_from_user()
 
-    response = requests.get('https://api.nasa.gov/planetary/apod?api_key={}&date={}'.format(utilities.key, selected_date))
+    response = requests.get(
+        'https://api.nasa.gov/planetary/apod?api_key={}&date={}'.format(utilities.key, selected_date))
     # checking for code 200 (ok)
     if response:
         print('**Success! we will now check the media type')
@@ -22,10 +23,6 @@ def main():
     else:
         print('An error has occurred.')
         print('Response cods: {}'.format(response))
-
-    # Getting the url dict:
-    url_data = json.loads(response.text)
-
 
 
 if __name__ == '__main__':
