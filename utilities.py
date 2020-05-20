@@ -33,7 +33,7 @@ def checking_file_size():
     # Checking if file downloaded
     downloaded_length = os.path.getsize('{}/image.jpg'.format(home))
     if downloaded_length == file_length[0]:
-        print(colored('The pic has been downloaded to your PC', 'blue'))
+        print(colored('The pic has been downloaded to your PC at directory: {}'.format(home), 'blue'))
     else:
         print(colored('ERROR during download', 'red'))
 
