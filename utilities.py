@@ -13,10 +13,7 @@ file_length = []
 def check_for_media_type(url_data):
     media_type = url_data["media_type"]
 
-    if 'video' not in media_type:
-        return True
-    else:
-        return False
+    return 'video' not in media_type
 
 
 def pic_downloader(user_url):

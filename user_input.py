@@ -18,10 +18,6 @@ def get_date_from_user():
 
 def get_quality_from_user(url_data):
     user_input_hd = input('Do you want it in HD or not? (enter "HD"/"not"): ').lower()
-
-    if user_input_hd[0] == "h":
-        selected_quality_key = "hdurl"
-    else:
-        selected_quality_key = "url"
+    selected_quality_key = "hdurl" if user_input_hd[0] == "h" else "url"
 
     return url_data[selected_quality_key]
