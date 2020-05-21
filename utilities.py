@@ -2,32 +2,33 @@ import requests, os
 from termcolor import colored, cprint
 from pathlib import Path
 
-
-# Getting user folder
-#user = os.getlogin()
+# Getting user folder:
+# user = os.getlogin()
 home = str(Path.home())
 key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
 file_length = []
 
 
+# Chacking if there is pic or video in the specific date:
 def check_for_media_type(url_data):
     media_type = url_data["media_type"]
 
     return 'video' not in media_type
 
 
+# Downloading the pic:
 def pic_downloader(user_url):
     file_request = requests.get('{}?api_key={}'.format(user_url, key))
     file_length.append(int(file_request.headers.get('content-length')))
 
-    # Checking for the response status
+    # Checking for the response status:
     if file_request.status_code == 200:
         with open('{}/image.jpg'.format(home), 'wb') as file:
             file.write(file_request.content)
 
 
 def checking_file_size():
-    # Checking if file downloaded
+    # Checking if file downloaded:
     downloaded_length = os.path.getsize('{}/image.jpg'.format(home))
     if downloaded_length == file_length[0]:
         print(colored('The pic has been downloaded to your PC at directory: {}'.format(home), 'blue'))
