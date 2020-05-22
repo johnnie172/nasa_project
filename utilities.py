@@ -1,4 +1,4 @@
-import requests, os
+import requests, os, re
 from termcolor import colored, cprint
 from pathlib import Path
 
@@ -27,11 +27,24 @@ def pic_downloader(user_url):
             file.write(file_request.content)
 
 
+# Making a description file:
+def make_text_file(url_data):
+    # Getting the text:
+    text = str(url_data["explanation"])
+    # Making the text readble and not one liner:
+    splitted_text = re.findall(r'(?:\d[,.]|[^,.])*(?:[,.]|$)', text)
+    splitted_text = "\n".join(splitted_text)
+    # Opening the file and writing the text:
+    with open('{}/image_explanation.txt'.format(home), 'w') as text_file:
+        text_file.write(splitted_text)
+
+
+# Checking if file downloaded:
 def checking_file_size():
-    # Checking if file downloaded:
     downloaded_length = os.path.getsize('{}/image.jpg'.format(home))
     if downloaded_length == file_length[0]:
-        print(colored('The pic has been downloaded to your PC at directory: {}'.format(home), 'blue'))
+        print(colored('The pic and explanation txt file has been downloaded to your PC at directory: {}'.format(home),
+                      'blue'))
     else:
         print(colored('ERROR during download', 'red'))
 

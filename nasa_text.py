@@ -14,6 +14,9 @@ def main():
         url_data = json.loads(response.text)
         # Checking for media type:
         if utilities.check_for_media_type(url_data):
+            # Making text file with pic explanation:
+            utilities.make_text_file(url_data)
+            # Asking for quality to download
             selected_quality = user_input.get_quality_from_user(url_data)
             # Downloading the pic:
             utilities.pic_downloader(selected_quality)
