@@ -1,19 +1,21 @@
-import requests, os, re
-from termcolor import colored, cprint
+import requests, os, re, time
+from termcolor import colored
 from pathlib import Path
+import consts
 
 # Getting user folder:
 # user = os.getlogin()
-home = str(Path.home())
-key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
+from consts import key
+
+get_user_home_path = str(Path.home())
 file_length = []
 
 
 # Chacking if there is pic or video in the specific date:
 def check_for_media_type(url_data):
-    media_type = url_data["media_type"]
+    media_type = url_data[consts.media_type]
 
-    return 'video' not in media_type
+    return consts.video not in media_type
 
 
 # Downloading the pic:
@@ -23,33 +25,38 @@ def pic_downloader(user_url):
 
     # Checking for the response status:
     if file_request.status_code == 200:
-        with open('{}/image.jpg'.format(home), 'wb') as file:
+        with open('{}/image.jpg'.format(get_user_home_path), 'wb') as file:
             file.write(file_request.content)
+            return False
+
 
 
 # Making a description file:
-def make_text_file(url_data):
+def make_explanation_text_file(url_data):
     # Getting the text:
     text = str(url_data["explanation"])
-    # Making the text readble and not one liner:
+    # Making the text readable and not one liner:
     splitted_text = re.findall(r'(?:\d[,.]|[^,.])*(?:[,.]|$)', text)
-    splitted_text = "\n".join(splitted_text)
+    # Deleting the spaces in the beginning of each line:
+    new_splitted_text = [line[1:] for line in splitted_text[1:]]
+    new_splitted_text = [splitted_text[0]] + new_splitted_text
+    splitted_text = "\n".join(new_splitted_text)
     # Opening the file and writing the text:
-    with open('{}/image_explanation.txt'.format(home), 'w') as text_file:
+    with open('{}/image_explanation.txt'.format(get_user_home_path), 'w') as text_file:
         text_file.write(splitted_text)
 
 
 # Checking if file downloaded:
 def checking_file_size():
-    downloaded_length = os.path.getsize('{}/image.jpg'.format(home))
+    downloaded_length = os.path.getsize('{}/image.jpg'.format(get_user_home_path))
     if downloaded_length == file_length[0]:
-        print(colored('The pic and explanation txt file has been downloaded to your PC at directory: {}'.format(home),
+        print(colored('\nThe pic and explanation txt file has been downloaded to your PC at directory: {}'.format(get_user_home_path),
                       'blue'))
     else:
         print(colored('ERROR during download', 'red'))
 
 
-def loading():
+def loading(input):
     loading1 = colored('Loading.', 'red', attrs=['reverse', 'blink'])
     loading2 = colored('.', 'red', attrs=['reverse', 'blink'])
     loading3 = colored('.', 'red', attrs=['reverse', 'blink'])
@@ -57,8 +64,10 @@ def loading():
     loading5 = colored('.', 'red', attrs=['reverse', 'blink'])
 
     loading_lst = [loading1, loading2, loading3, loading4, loading5]
-    while True:
+    while input != True:
 
         for load in loading_lst:
             print(load, end='')
             time.sleep(1)
+
+        break
