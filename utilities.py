@@ -5,7 +5,7 @@ import consts
 
 # Getting user folder:
 # user = os.getlogin()
-from consts import key
+from consts import KEY
 
 get_user_home_path = str(Path.home())
 file_length = []
@@ -13,14 +13,14 @@ file_length = []
 
 # Chacking if there is pic or video in the specific date:
 def check_for_media_type(url_data):
-    media_type = url_data[consts.media_type]
+    media_type = url_data[consts.MEDIA_TYPE]
 
-    return consts.video not in media_type
+    return consts.VIDEO not in media_type
 
 
 # Downloading the pic:
 def pic_downloader(user_url):
-    file_request = requests.get('{}?api_key={}'.format(user_url, key))
+    file_request = requests.get('{}?api_key={}'.format(user_url, KEY))
     file_length.append(int(file_request.headers.get('content-length')))
 
     # Checking for the response status:

@@ -2,21 +2,24 @@
 
 # request conts:
 
-url = 'https://api.nasa.gov/planetary/apod?api_key={}&date={}'
+URL = 'https://api.nasa.gov/planetary/apod?api_key={}&date={}'
 
-key = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
+KEY = 'sRkSnDSlvzNR4VVZpHh31vM83gNB1ndbeAANCoId'
 
-media_type = 'media_type'
+MEDIA_TYPE = 'media_type'
 
-video = 'video'
+VIDEO = 'video'
 
 
 
 # print conts:
 
-check_madia_type_messege = '**Success! we will now check the media type'
+CHECK_MEDIA_TYPE_MESSEGE = '**Success! we will now check the media type'
 
-not_supporting_video_messege = "Sorry, we are currently not supporting video download, here is the link to the video:"
+NOT_SUPPORTING_VIDEO_MESSEGE = "Sorry, we are currently not supporting video download, here is the link to the video:"
 
-generic_error_messege = 'An error has occurred.'
+GENERIC_ERROR_MESSEGE = 'An error has occurred.'
 
+INTERNET_CONNECTION_OK_MESSEGE = 'Internet connection ok!'
+
+INTERNET_CONNECTION_FAIL_MESSEGE = 'Connection to internet failed!'
