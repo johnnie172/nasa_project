@@ -2,9 +2,6 @@ import requests, os, re, time
 from termcolor import colored
 from pathlib import Path
 import consts
-
-# Getting user folder:
-# user = os.getlogin()
 from consts import KEY
 
 get_user_home_path = str(Path.home())
@@ -30,7 +27,6 @@ def pic_downloader(user_url):
             return False
 
 
-
 # Making a description file:
 def make_explanation_text_file(url_data):
     # Getting the text:
@@ -50,24 +46,8 @@ def make_explanation_text_file(url_data):
 def checking_file_size():
     downloaded_length = os.path.getsize('{}/image.jpg'.format(get_user_home_path))
     if downloaded_length == file_length[0]:
-        print(colored('\nThe pic and explanation txt file has been downloaded to your PC at directory: {}'.format(get_user_home_path),
-                      'blue'))
+        print(colored('\nThe pic and explanation txt file has been downloaded to your PC at directory: {}'.format(
+            get_user_home_path),
+            'blue'))
     else:
         print(colored('ERROR during download', 'red'))
-
-
-def loading(input):
-    loading1 = colored('Loading.', 'red', attrs=['reverse', 'blink'])
-    loading2 = colored('.', 'red', attrs=['reverse', 'blink'])
-    loading3 = colored('.', 'red', attrs=['reverse', 'blink'])
-    loading4 = colored('.', 'red', attrs=['reverse', 'blink'])
-    loading5 = colored('.', 'red', attrs=['reverse', 'blink'])
-
-    loading_lst = [loading1, loading2, loading3, loading4, loading5]
-    while input != True:
-
-        for load in loading_lst:
-            print(load, end='')
-            time.sleep(1)
-
-        break

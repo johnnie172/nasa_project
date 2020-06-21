@@ -17,6 +17,3 @@ def show_loader(input):
             time.sleep(1)
 
         break
-
-
-
